@@ -8,7 +8,6 @@ import androidx.compose.ui.graphics.ExperimentalGraphicsApi
 import androidx.compose.ui.graphics.toArgb
 import com.google.gson.JsonObject
 import com.google.gson.JsonPrimitive
-import com.google.gson.annotations.SerializedName
 import com.squareup.moshi.JsonClass
 import java.time.Instant
 import java.time.format.DateTimeFormatter
@@ -25,31 +24,41 @@ data class SyncTheme(
 //    @Json(name = "content_color") val contentColor: Color,
 //    @Json(name = "sticky_text_color") val stickyTextColor: Color
 
-    @SerializedName("name") val name: String,
-    @SerializedName("primary_color") val primaryColor: Color,
-    @SerializedName("highlight_color") val highlightColor: Color,
-    @SerializedName("accent_color") val accentColor: Color,
-    @SerializedName("content_color") val contentColor: Color,
-    @SerializedName("window_color") val windowColor: Color,
-    @SerializedName("primary_text_color") val primaryTextColor: Color,
-    @SerializedName("secondary_text_color") val secondaryTextColor: Color,
-    @SerializedName("sticky_text_color") val stickyTextColor: Color
+//    @SerializedName("name") val name: String,
+//    @SerializedName("primary_color") val primaryColor: NamedColor,
+//    @SerializedName("highlight_color") val highlightColor: NamedColor,
+//    @SerializedName("accent_color") val accentColor: NamedColor,
+//    @SerializedName("content_color") val contentColor: NamedColor,
+//    @SerializedName("window_color") val windowColor: NamedColor,
+//    @SerializedName("primary_text_color") val primaryTextColor: NamedColor,
+//    @SerializedName("secondary_text_color") val secondaryTextColor: NamedColor,
+//    @SerializedName("sticky_text_color") val stickyTextColor: NamedColor
+
+    val name: String,
+    val primaryColor: NamedColor,
+    val highlightColor: NamedColor,
+    val accentColor: NamedColor,
+    val contentColor: NamedColor,
+    val windowColor: NamedColor,
+    val primaryTextColor: NamedColor,
+    val secondaryTextColor: NamedColor,
+    val stickyTextColor: NamedColor
 ) {
     fun toJson(): JsonObject {
         val jsonObject = JsonObject()
         jsonObject.add("name", JsonPrimitive(name))
-        jsonObject.add("primary_color", JsonPrimitive(primaryColor.toHex()))
-        jsonObject.add("highlight_color", JsonPrimitive(highlightColor.toHex()))
-        jsonObject.add("accent_color", JsonPrimitive(accentColor.toHex()))
-        jsonObject.add("content_color", JsonPrimitive(contentColor.toHex()))
-        jsonObject.add("window_color", JsonPrimitive(windowColor.toHex()))
-        jsonObject.add("primary_text_color", JsonPrimitive(primaryTextColor.toHex()))
-        jsonObject.add("secondary_text_color", JsonPrimitive(secondaryTextColor.toHex()))
-        jsonObject.add("sticky_text_color", JsonPrimitive(stickyTextColor.toHex()))
+        jsonObject.add("primary_color", JsonPrimitive(primaryColor.color.toHex()))
+        jsonObject.add("highlight_color", JsonPrimitive(highlightColor.color.toHex()))
+        jsonObject.add("accent_color", JsonPrimitive(accentColor.color.toHex()))
+        jsonObject.add("content_color", JsonPrimitive(contentColor.color.toHex()))
+        jsonObject.add("window_color", JsonPrimitive(windowColor.color.toHex()))
+        jsonObject.add("primary_text_color", JsonPrimitive(primaryTextColor.color.toHex()))
+        jsonObject.add("secondary_text_color", JsonPrimitive(secondaryTextColor.color.toHex()))
+        jsonObject.add("sticky_text_color", JsonPrimitive(stickyTextColor.color.toHex()))
         return jsonObject
     }
 
-    fun toColorList(): List<Pair<String, Color>> {
+    fun toColorList(): List<Pair<String, NamedColor>> {
         return listOf(
             Pair("Primary color", primaryColor),
             Pair("Highlight color", highlightColor),
@@ -64,18 +73,8 @@ data class SyncTheme(
 
     companion object {
         @OptIn(ExperimentalGraphicsApi::class)
-        fun default(): SyncTheme {
-            return SyncTheme(
-                name = "Default",
-                primaryColor = Color.White,
-                accentColor = Color.Blue,
-                highlightColor = Color.hsv(23f, 0.94f, 0.97f),
-                primaryTextColor = Color.Black,
-                secondaryTextColor = Color.Gray,
-                windowColor = Color.hsv(0f, 0f, 0.93f),
-                contentColor = Color.White,
-                stickyTextColor = Color.Green,
-            )
+        fun default(context: Context): SyncTheme {
+            return createTheme(context, false)
         }
     }
 }
@@ -94,14 +93,14 @@ fun createTheme(context: Context, dark: Boolean): SyncTheme {
                 Instant.now()
             )
         })",
-        primaryColor = colorScheme.primary,
-        accentColor = colorScheme.tertiary,
-        highlightColor = colorScheme.secondary,
-        primaryTextColor = colorScheme.primary,
-        secondaryTextColor = colorScheme.secondary,
-        windowColor = colorScheme.surface,
-        contentColor = colorScheme.surfaceVariant,
-        stickyTextColor = colorScheme.tertiary,
+        primaryColor = NamedColor(ColorOption.PRIMARY, colorScheme.primary),
+        accentColor = NamedColor(ColorOption.TERTIARY, colorScheme.tertiary),
+        highlightColor = NamedColor(ColorOption.SECONDARY, colorScheme.secondary),
+        primaryTextColor = NamedColor(ColorOption.PRIMARY, colorScheme.primary),
+        secondaryTextColor = NamedColor(ColorOption.SECONDARY, colorScheme.secondary),
+        windowColor = NamedColor(ColorOption.SURFACE, colorScheme.surface),
+        contentColor = NamedColor(ColorOption.SURFACE_VARIANT, colorScheme.surfaceVariant),
+        stickyTextColor = NamedColor(ColorOption.TERTIARY, colorScheme.tertiary),
     )
 }
 

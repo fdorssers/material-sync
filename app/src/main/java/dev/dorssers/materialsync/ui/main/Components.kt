@@ -17,7 +17,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import dev.dorssers.materialsync.data.SyncTheme
-import dev.dorssers.materialsync.data.toHex
 import dev.dorssers.materialsync.util.copyToClipboard
 
 @Composable
@@ -30,20 +29,20 @@ fun SyncThemeExample(syncTheme: SyncTheme) {
     ) {
         Column(
             Modifier
-                .background(color = syncTheme.contentColor)
+                .background(color = syncTheme.contentColor.color)
                 .fillMaxWidth()
         ) {
             Column(
                 Modifier
-                    .background(color = syncTheme.primaryColor)
+                    .background(color = syncTheme.primaryColor.color)
                     .fillMaxWidth()
             ) {
                 Text(text = "Primary color")
             }
-            Text(text = "Primary text color", color = syncTheme.primaryTextColor)
-            Text(text = "Secondary text color", color = syncTheme.secondaryTextColor)
-            Text(text = "Highlight color", color = syncTheme.highlightColor)
-            Text(text = "Accent color", color = syncTheme.accentColor)
+            Text(text = "Primary text color", color = syncTheme.primaryTextColor.color)
+            Text(text = "Secondary text color", color = syncTheme.secondaryTextColor.color)
+            Text(text = "Highlight color", color = syncTheme.highlightColor.color)
+            Text(text = "Accent color", color = syncTheme.accentColor.color)
         }
     }
 }
@@ -75,14 +74,25 @@ fun ClipboardButton(text: String) {
 fun ColorList(syncTheme: SyncTheme) {
     val items = syncTheme.toColorList()
     Column(Modifier.fillMaxWidth()) {
-        items.forEach {(name, color) -> ColorExample(name = name, color = color)}
+        items.forEach { (name, color) -> ColorExample(name = name, color = color.color) }
     }
 }
 
 @Composable
 fun ColorExample(name: String, color: Color) {
-    Row(Modifier.fillMaxWidth().padding(vertical = 4.dp), horizontalArrangement = Arrangement.SpaceBetween) {
+    Row(
+        Modifier
+            .fillMaxWidth()
+            .padding(vertical = 4.dp),
+        horizontalArrangement = Arrangement.SpaceBetween
+    ) {
         Text(text = name)
-        Box(Modifier.size(26.dp).clip(CircleShape).background(color).border(2.dp, Color.Black, shape = CircleShape))
+        Box(
+            Modifier
+                .size(26.dp)
+                .clip(CircleShape)
+                .background(color)
+                .border(2.dp, Color.Black, shape = CircleShape)
+        )
     }
 }

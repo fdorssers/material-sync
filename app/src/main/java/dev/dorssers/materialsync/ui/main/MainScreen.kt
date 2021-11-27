@@ -17,9 +17,9 @@ import dev.dorssers.materialsync.data.createTheme
 
 @Composable
 fun MainScreen() {
-    var syncTheme by remember { mutableStateOf(SyncTheme.default()) }
-    var textFieldValue = TextFieldValue(syncTheme.toJson().toString())
     val context = LocalContext.current
+    var syncTheme by remember { mutableStateOf(SyncTheme.default(context)) }
+    var textFieldValue = TextFieldValue(syncTheme.toJson().toString())
     Column(Modifier.padding(24.dp), horizontalAlignment = Alignment.CenterHorizontally) {
         Text(text = "Material Sync", style = MaterialTheme.typography.displayLarge)
         Spacer(modifier = Modifier.height(16.dp))
