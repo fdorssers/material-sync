@@ -14,6 +14,10 @@ import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import dev.dorssers.materialsync.data.SyncTheme
 import dev.dorssers.materialsync.data.createTheme
+import dev.dorssers.materialsync.ui.components.ClipboardButton
+import dev.dorssers.materialsync.ui.components.ColorList
+import dev.dorssers.materialsync.ui.components.SyncThemeExample
+import dev.dorssers.materialsync.ui.components.ThemeButton
 
 @Composable
 fun ThemeScreen() {
