@@ -11,6 +11,7 @@ import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.TextRange
 import androidx.compose.ui.text.input.TextFieldValue
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import dev.dorssers.materialsync.data.SyncTheme
 import dev.dorssers.materialsync.data.createTheme
@@ -45,4 +46,10 @@ fun ThemeScreen() {
         ClipboardButton(text = syncTheme.toJson().toString())
         ColorList(syncTheme = syncTheme)
     }
+}
+
+@Preview
+@Composable
+fun ThemeScreenPreview() {
+    ThemeScreen()
 }
