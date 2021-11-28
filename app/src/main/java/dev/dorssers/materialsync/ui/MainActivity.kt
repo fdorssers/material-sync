@@ -9,7 +9,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import dev.dorssers.materialsync.ui.main.MainScreen
+import dev.dorssers.materialsync.ui.main.ThemeScreen
 import dev.dorssers.materialsync.ui.theme.MaterialSyncTheme
 
 
@@ -23,7 +23,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    MainScreen()
+                    ThemeScreen()
                 }
             }
         }

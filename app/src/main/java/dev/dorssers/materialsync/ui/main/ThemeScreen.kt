@@ -16,7 +16,7 @@ import dev.dorssers.materialsync.data.SyncTheme
 import dev.dorssers.materialsync.data.createTheme
 
 @Composable
-fun MainScreen() {
+fun ThemeScreen() {
     val context = LocalContext.current
     var syncTheme by remember { mutableStateOf(SyncTheme.default(context)) }
     var textFieldValue = TextFieldValue(syncTheme.toJson().toString())
