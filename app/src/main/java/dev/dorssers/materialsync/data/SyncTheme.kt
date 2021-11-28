@@ -4,7 +4,6 @@ import android.content.Context
 import androidx.compose.material3.dynamicDarkColorScheme
 import androidx.compose.material3.dynamicLightColorScheme
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.ExperimentalGraphicsApi
 import androidx.compose.ui.graphics.toArgb
 import com.google.gson.JsonObject
 import com.google.gson.JsonPrimitive
@@ -72,7 +71,6 @@ data class SyncTheme(
     }
 
     companion object {
-        @OptIn(ExperimentalGraphicsApi::class)
         fun default(context: Context): SyncTheme {
             return createTheme(context, false)
         }

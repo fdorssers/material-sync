@@ -1,9 +1,11 @@
 package dev.dorssers.materialsync.ui.components
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -16,28 +18,45 @@ import dev.dorssers.materialsync.data.SyncTheme
 
 @Composable
 fun SyncThemeExample(syncTheme: SyncTheme) {
-    Card(
-        Modifier
-            .padding(16.dp)
+    val horizontalTextPadding = 16.dp
+    val verticalTextPadding = 12.dp
+    Box(
+        modifier = Modifier
             .fillMaxWidth()
-            .shadow(6.dp)
+            .background(color = syncTheme.windowColor.color)
     ) {
-        Column(
-            Modifier
-                .background(color = syncTheme.contentColor.color)
+        Card(
+            modifier = Modifier
+                .padding(16.dp)
                 .fillMaxWidth()
+                .shadow(6.dp),
+            shape = RoundedCornerShape(4.dp)
         ) {
             Column(
                 Modifier
-                    .background(color = syncTheme.primaryColor.color)
+                    .background(color = syncTheme.contentColor.color)
                     .fillMaxWidth()
             ) {
-                Text(text = "Primary color")
+                Column(
+                    Modifier
+                        .background(color = syncTheme.primaryColor.color)
+                        .padding(horizontal = horizontalTextPadding, vertical = verticalTextPadding)
+                        .fillMaxWidth()
+                ) {
+                    Text(text = "Primary color")
+                }
+                Column(
+                    Modifier.padding(
+                        horizontal = horizontalTextPadding,
+                        vertical = verticalTextPadding
+                    )
+                ) {
+                    Text(text = "Primary text color", color = syncTheme.primaryTextColor.color)
+                    Text(text = "Secondary text color", color = syncTheme.secondaryTextColor.color)
+                    Text(text = "Highlight color", color = syncTheme.highlightColor.color)
+                    Text(text = "Accent color", color = syncTheme.accentColor.color)
+                }
             }
-            Text(text = "Primary text color", color = syncTheme.primaryTextColor.color)
-            Text(text = "Secondary text color", color = syncTheme.secondaryTextColor.color)
-            Text(text = "Highlight color", color = syncTheme.highlightColor.color)
-            Text(text = "Accent color", color = syncTheme.accentColor.color)
         }
     }
 }

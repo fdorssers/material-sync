@@ -1,6 +1,9 @@
 package dev.dorssers.materialsync.data
 
+import android.content.Context
 import androidx.compose.material3.ColorScheme
+import androidx.compose.material3.dynamicDarkColorScheme
+import androidx.compose.material3.dynamicLightColorScheme
 import androidx.compose.ui.graphics.Color
 
 enum class ColorOption {
@@ -67,33 +70,39 @@ data class NamedColor(val option: ColorOption, val color: Color)
 
 fun ColorScheme.getNamedColors(): List<NamedColor> {
     return listOf(
-        NamedColor(option=ColorOption.PRIMARY, color=this.primary),
-        NamedColor(option=ColorOption.ON_PRIMARY, color=this.onPrimary),
-        NamedColor(option=ColorOption.PRIMARY_CONTAINER, color=this.primaryContainer),
-        NamedColor(option=ColorOption.ON_PRIMARY_CONTAINER, color=this.onPrimaryContainer),
-        NamedColor(option=ColorOption.INVERSE_PRIMARY, color=this.inversePrimary),
-        NamedColor(option=ColorOption.SECONDARY, color=this.secondary),
-        NamedColor(option=ColorOption.ON_SECONDARY, color=this.onSecondary),
-        NamedColor(option=ColorOption.SECONDARY_CONTAINER, color=this.secondaryContainer),
-        NamedColor(option=ColorOption.ON_SECONDARY_CONTAINER, color=this.onSecondaryContainer),
-        NamedColor(option=ColorOption.TERTIARY, color=this.tertiary),
-        NamedColor(option=ColorOption.ON_TERTIARY, color=this.onTertiary),
-        NamedColor(option=ColorOption.TERTIARY_CONTAINER, color=this.tertiaryContainer),
-        NamedColor(option=ColorOption.ON_TERTIARY_CONTAINER, color=this.onTertiaryContainer),
-        NamedColor(option=ColorOption.BACKGROUND, color=this.background),
-        NamedColor(option=ColorOption.ON_BACKGROUND, color=this.onBackground),
-        NamedColor(option=ColorOption.SURFACE, color=this.surface),
-        NamedColor(option=ColorOption.ON_SURFACE, color=this.onSurface),
-        NamedColor(option=ColorOption.SURFACE_VARIANT, color=this.surfaceVariant),
-        NamedColor(option=ColorOption.ON_SURFACE_VARIANT, color=this.onSurfaceVariant),
-        NamedColor(option=ColorOption.INVERSE_SURFACE, color=this.inverseSurface),
-        NamedColor(option=ColorOption.INVERSE_ON_SURFACE, color=this.inverseOnSurface),
-        NamedColor(option=ColorOption.ERROR, color=this.error),
-        NamedColor(option=ColorOption.ON_ERROR, color=this.onError),
-        NamedColor(option=ColorOption.ERROR_CONTAINER, color=this.errorContainer),
-        NamedColor(option=ColorOption.ON_ERROR_CONTAINER, color=this.onErrorContainer),
-        NamedColor(option=ColorOption.OUTLINE, color=this.outline),
+        NamedColor(option = ColorOption.PRIMARY, color = this.primary),
+        NamedColor(option = ColorOption.ON_PRIMARY, color = this.onPrimary),
+        NamedColor(option = ColorOption.PRIMARY_CONTAINER, color = this.primaryContainer),
+        NamedColor(option = ColorOption.ON_PRIMARY_CONTAINER, color = this.onPrimaryContainer),
+        NamedColor(option = ColorOption.INVERSE_PRIMARY, color = this.inversePrimary),
+        NamedColor(option = ColorOption.SECONDARY, color = this.secondary),
+        NamedColor(option = ColorOption.ON_SECONDARY, color = this.onSecondary),
+        NamedColor(option = ColorOption.SECONDARY_CONTAINER, color = this.secondaryContainer),
+        NamedColor(option = ColorOption.ON_SECONDARY_CONTAINER, color = this.onSecondaryContainer),
+        NamedColor(option = ColorOption.TERTIARY, color = this.tertiary),
+        NamedColor(option = ColorOption.ON_TERTIARY, color = this.onTertiary),
+        NamedColor(option = ColorOption.TERTIARY_CONTAINER, color = this.tertiaryContainer),
+        NamedColor(option = ColorOption.ON_TERTIARY_CONTAINER, color = this.onTertiaryContainer),
+        NamedColor(option = ColorOption.BACKGROUND, color = this.background),
+        NamedColor(option = ColorOption.ON_BACKGROUND, color = this.onBackground),
+        NamedColor(option = ColorOption.SURFACE, color = this.surface),
+        NamedColor(option = ColorOption.ON_SURFACE, color = this.onSurface),
+        NamedColor(option = ColorOption.SURFACE_VARIANT, color = this.surfaceVariant),
+        NamedColor(option = ColorOption.ON_SURFACE_VARIANT, color = this.onSurfaceVariant),
+        NamedColor(option = ColorOption.INVERSE_SURFACE, color = this.inverseSurface),
+        NamedColor(option = ColorOption.INVERSE_ON_SURFACE, color = this.inverseOnSurface),
+        NamedColor(option = ColorOption.ERROR, color = this.error),
+        NamedColor(option = ColorOption.ON_ERROR, color = this.onError),
+        NamedColor(option = ColorOption.ERROR_CONTAINER, color = this.errorContainer),
+        NamedColor(option = ColorOption.ON_ERROR_CONTAINER, color = this.onErrorContainer),
+        NamedColor(option = ColorOption.OUTLINE, color = this.outline),
     )
+}
+
+fun getNamedColors(context: Context, dark: Boolean): List<NamedColor> {
+    val colorScheme =
+        if (dark) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
+    return colorScheme.getNamedColors()
 }
 
 class NamedColorScheme
