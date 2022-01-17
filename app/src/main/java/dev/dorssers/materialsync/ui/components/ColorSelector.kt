@@ -68,12 +68,6 @@ fun ColorExample(
         Divider()
     }
     if (!collapsed) {
-//        LazyVerticalGrid(cells = GridCells.Fixed(3), content = {
-//            items(colorOptions) {
-//                item -> Box(modifier = Modifier.fillMaxWidth().height(16.dp).background(item.color))
-//            }
-//        }
-//        )
         colorOptions.forEach {
             Column(
                 modifier = Modifier

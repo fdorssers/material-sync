@@ -2,13 +2,13 @@ package dev.dorssers.materialsync.ui.main
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import dev.dorssers.materialsync.data.NamedColor
 import dev.dorssers.materialsync.data.SyncTheme
 import dev.dorssers.materialsync.data.createTheme
 import dev.dorssers.materialsync.data.getNamedColors
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 
 
 class ThemeViewModel(application: Application) : AndroidViewModel(application) {
@@ -16,38 +16,29 @@ class ThemeViewModel(application: Application) : AndroidViewModel(application) {
     private val initialValue = true
 
     private val _isDark = MutableStateFlow(initialValue)
-    val isDark: StateFlow<Boolean> get() = _isDark
+    val isDark: StateFlow<Boolean> get() = _isDark.asStateFlow()
 
-    val syncTheme: StateFlow<SyncTheme>
-        get() = isDark.map {
-            createTheme(
-                getApplication<Application>().applicationContext,
-                _isDark.value
-            )
-        }.stateIn(
-            viewModelScope, SharingStarted.Eagerly, createTheme(
-                getApplication<Application>().applicationContext,
-                initialValue
-            )
+    private val _syncTheme = MutableStateFlow(
+        createTheme(
+            getApplication<Application>().applicationContext,
+            initialValue
         )
+    )
+    val syncTheme: StateFlow<SyncTheme> get() = _syncTheme.asStateFlow()
 
-    val namedColors: StateFlow<List<NamedColor>>
-        get() = isDark.map {
-            getNamedColors(getApplication<Application>().applicationContext, _isDark.value)
-        }.stateIn(
-            viewModelScope,
-            SharingStarted.Eagerly,
-            getNamedColors(getApplication<Application>().applicationContext, _isDark.value)
+    private val _namedColors = MutableStateFlow(
+        getNamedColors(
+            getApplication<Application>().applicationContext,
+            initialValue
         )
+    )
+    val namedColors: StateFlow<List<NamedColor>> get() = _namedColors.asStateFlow()
 
 
     fun setDark(dark: Boolean) {
         _isDark.value = dark
-//        _isDark.map {
-//            createTheme(
-//                getApplication<Application>().applicationContext,
-//                _isDark.value
-//            )
-//        }
+        _syncTheme.value =
+            createTheme(getApplication<Application>().applicationContext, dark)
+        _namedColors.value = getNamedColors(getApplication<Application>().applicationContext, dark)
     }
 }

@@ -26,12 +26,6 @@ fun ThemeScreen(viewModel: ThemeViewModel) {
     val syncTheme by viewModel.syncTheme.collectAsState()
     val colorOptions by viewModel.namedColors.collectAsState()
 
-//    val context = LocalContext.current
-//    var isDark by remember { mutableStateOf(false) }
-//    var syncTheme by remember { mutableStateOf(createTheme(context, isDark)) }
-//    var colorOptions by remember { mutableStateOf(getNamedColors(context, isDark)) }
-
-
     Column(
         Modifier
             .verticalScroll(rememberScrollState()),
@@ -47,15 +41,9 @@ fun ThemeScreen(viewModel: ThemeViewModel) {
             ThemeButton(false) {
                 Timber.d("Update")
                 viewModel.setDark(false)
-//                isDark = false
-//                syncTheme = createTheme(context, false)
-//                colorOptions = getNamedColors(context, false)
             }
             ThemeButton(true) {
                 viewModel.setDark(true)
-//                isDark = true
-//                syncTheme = createTheme(context, true)
-//                colorOptions = getNamedColors(context, true)
             }
         }
         Spacer(modifier = Modifier.height(16.dp))
@@ -68,9 +56,3 @@ fun ThemeScreen(viewModel: ThemeViewModel) {
         Text(text = "${isDark}")
     }
 }
-
-//@Preview
-//@Composable
-//fun ThemeScreenPreview() {
-//    ThemeScreen()
-//}
