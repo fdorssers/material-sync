@@ -89,3 +89,4 @@ lint/tmp/
 ##########
 .DS_Store
 .idea/
+!assets/material-sync-app-debug.apk
