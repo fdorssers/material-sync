@@ -17,7 +17,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: v1.0.0
+          tag_name: v1.0.1
           asset_path: app/build/outputs/apk/debug/app-debug.apk
           asset_name: material-sync-debug.apk
           asset_content_type: application/zip
