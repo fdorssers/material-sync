@@ -21,11 +21,17 @@ import dev.dorssers.materialsync.ui.components.ThemeButton
 import timber.log.Timber
 
 @Composable
-fun ThemeScreen() {
-    val context = LocalContext.current
-    var isDark by remember { mutableStateOf(false) }
-    var syncTheme by remember { mutableStateOf(createTheme(context, isDark)) }
-    var colorOptions by remember { mutableStateOf(getNamedColors(context, isDark)) }
+fun ThemeScreen(viewModel: ThemeViewModel) {
+    val isDark by viewModel.isDark.collectAsState()
+    val syncTheme by viewModel.syncTheme.collectAsState()
+    val colorOptions by viewModel.namedColors.collectAsState()
+
+//    val context = LocalContext.current
+//    var isDark by remember { mutableStateOf(false) }
+//    var syncTheme by remember { mutableStateOf(createTheme(context, isDark)) }
+//    var colorOptions by remember { mutableStateOf(getNamedColors(context, isDark)) }
+
+
     Column(
         Modifier
             .verticalScroll(rememberScrollState()),
@@ -40,14 +46,16 @@ fun ThemeScreen() {
         Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceEvenly) {
             ThemeButton(false) {
                 Timber.d("Update")
+                viewModel.setDark(false)
 //                isDark = false
-                syncTheme = createTheme(context, false)
-                colorOptions = getNamedColors(context, false)
+//                syncTheme = createTheme(context, false)
+//                colorOptions = getNamedColors(context, false)
             }
             ThemeButton(true) {
+                viewModel.setDark(true)
 //                isDark = true
-                syncTheme = createTheme(context, true)
-                colorOptions = getNamedColors(context, true)
+//                syncTheme = createTheme(context, true)
+//                colorOptions = getNamedColors(context, true)
             }
         }
         Spacer(modifier = Modifier.height(16.dp))
@@ -57,11 +65,12 @@ fun ThemeScreen() {
         Spacer(modifier = Modifier.height(16.dp))
         ClipboardButton(text = syncTheme.toJson().toString())
         ColorList(syncTheme = syncTheme, colorOptions = colorOptions)
+        Text(text = "${isDark}")
     }
 }
 
-@Preview
-@Composable
-fun ThemeScreenPreview() {
-    ThemeScreen()
-}
+//@Preview
+//@Composable
+//fun ThemeScreenPreview() {
+//    ThemeScreen()
+//}
