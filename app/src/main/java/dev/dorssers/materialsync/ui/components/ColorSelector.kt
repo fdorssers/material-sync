@@ -26,7 +26,7 @@ import dev.dorssers.materialsync.data.getNamedColors
 fun ColorList(syncTheme: SyncTheme, colorOptions: List<NamedColor>) {
     val items = syncTheme.toColorList()
     val collapsedState = remember(items) { items.map { true }.toMutableStateList() }
-    Column(Modifier.fillMaxWidth()) {
+    Column(Modifier.fillMaxWidth().padding(start=16.dp, end=16.dp)) {
 //        items.forEach { (name, color) -> ColorExample(name = name, color = color.color)}
         items.forEachIndexed { index, (name, color) ->
             val collapsed = collapsedState[index]
@@ -65,7 +65,6 @@ fun ColorExample(
                 .background(color)
                 .border(2.dp, Color.Black, shape = CircleShape)
         )
-        Divider()
     }
     if (!collapsed) {
         colorOptions.forEach {
