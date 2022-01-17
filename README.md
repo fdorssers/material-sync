@@ -4,6 +4,8 @@ This application provides an easy way to generate [Sync for reddit](https://play
 themes based on the current Material You [dynamic colors](https://m3.material.io/styles/color/dynamic-color/overview) 
 on the Pixel 6 (Pro).
 
+![Application screenshot](https://github.com/fdorssers/material-sync/blob/main/images/material-sync-screenshot.png)
+
 > :warning: :warning: :warning:
 >
 > :one: Note that this has only been tested on the Google Pixel 6 (Pro) and likely only supports
