@@ -92,8 +92,14 @@ fun createTheme(context: Context, dark: Boolean): SyncTheme {
             )
         })",
         primaryColor = NamedColor(ColorOption.PRIMARY, colorScheme.primary),
-        accentColor = NamedColor(ColorOption.TERTIARY, colorScheme.tertiary),
-        highlightColor = NamedColor(ColorOption.SECONDARY, colorScheme.secondary),
+//        accentColor = NamedColor(ColorOption.TERTIARY, colorScheme.tertiary),
+        accentColor = if (dark) {
+            NamedColor(ColorOption.ON_TERTIARY_CONTAINER, colorScheme.onTertiaryContainer)
+        } else {
+            NamedColor(ColorOption.INVERSE_PRIMARY, colorScheme.inversePrimary)
+        },
+//        highlightColor = NamedColor(ColorOption.ON_TERTIARY_CONTAINER, colorScheme.onTertiaryContainer),
+        highlightColor = NamedColor(ColorOption.TERTIARY, colorScheme.tertiary),
         primaryTextColor = NamedColor(ColorOption.PRIMARY, colorScheme.primary),
         secondaryTextColor = NamedColor(ColorOption.SECONDARY, colorScheme.secondary),
         windowColor = NamedColor(ColorOption.SURFACE, colorScheme.surface),
